@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import Header from '../components/layouts/Header'
 import { LoginProvider } from '../context/Login'
 import { UserProvider } from '../context/User'
+import { AccountsProvider } from '../context/Accounts';
+import { TransactionsProvider } from '../context/Transactions';
 
 const container = {
     padding: '5px'
@@ -18,7 +20,11 @@ function Bank() {
                         <Header />
                         <div style={container}>
                             <Switch>
-                                <URLRouter />
+                                <AccountsProvider>
+                                    <TransactionsProvider>
+                                        <URLRouter />
+                                    </TransactionsProvider>
+                                </AccountsProvider>
                             </Switch>
                         </div>
                     </UserProvider>

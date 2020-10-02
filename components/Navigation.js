@@ -12,8 +12,8 @@ function Navigation() {
             {login &&
                 <React.Fragment>
                     <Link style={link} to="/react-banking-app/dashboard">Dashboard</Link> {' '}
-                    <Link style={link} to="/react-banking-app/account">Account</Link> {' '}
-                    <Link style={link} to="/react-banking-app/transaction">Transaction</Link> {' '}
+                    <Link style={link} to="/react-banking-app/accounts">Accounts</Link> {' '}
+                    <Link style={link} to="/react-banking-app/transactions">Transaction</Link> {' '}
                     <Link style={link} to="/react-banking-app/profile">Profile</Link> {' '}
                     <Link style={link} to="/react-banking-app/logout" onClick={() => setLogin(false)}>Logout</Link>
                 </React.Fragment>
