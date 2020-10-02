@@ -86,6 +86,80 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/Accounts/List.js":
+/*!*************************************!*\
+  !*** ./components/Accounts/List.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_Accounts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/Accounts */ "./context/Accounts.js");
+/* harmony import */ var _context_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../context/Login */ "./context/Login.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Accounts_ListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Accounts/ListItem */ "./components/Accounts/ListItem.js");
+
+
+
+
+
+
+const AccountList = () => {
+  const [accounts, setAccounts] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_Accounts__WEBPACK_IMPORTED_MODULE_1__["AccountsContext"]);
+  const [login, setLogin] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_Login__WEBPACK_IMPORTED_MODULE_2__["IsLoginContext"]);
+  if (!login) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+    to: "/react-banking-app/"
+  });
+  return accounts.map(acc => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Accounts_ListItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: acc.id,
+    account: acc
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AccountList);
+
+/***/ }),
+
+/***/ "./components/Accounts/ListItem.js":
+/*!*****************************************!*\
+  !*** ./components/Accounts/ListItem.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const item = {
+  padding: '5px',
+  display: 'flex'
+};
+
+const ListItem = props => {
+  const {
+    account_number,
+    account_name,
+    first_name,
+    last_name,
+    bank_branch_code,
+    aadhar_number,
+    country,
+    txn_currency
+  } = props.account;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: item
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, account_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, account_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, first_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, last_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, bank_branch_code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, aadhar_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, country), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, txn_currency));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ListItem);
+
+/***/ }),
+
 /***/ "./components/Dashboard.js":
 /*!*********************************!*\
   !*** ./components/Dashboard.js ***!
@@ -216,10 +290,10 @@ function Navigation() {
     to: "/react-banking-app/dashboard"
   }, "Dashboard"), " ", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     style: link,
-    to: "/react-banking-app/account"
-  }, "Account"), " ", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/react-banking-app/accounts"
+  }, "Accounts"), " ", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     style: link,
-    to: "/react-banking-app/transaction"
+    to: "/react-banking-app/transactions"
   }, "Transaction"), " ", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     style: link,
     to: "/react-banking-app/profile"
@@ -263,6 +337,81 @@ function Profile() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Profile);
+
+/***/ }),
+
+/***/ "./components/Transactions/List.js":
+/*!*****************************************!*\
+  !*** ./components/Transactions/List.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_Transactions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../context/Transactions */ "./context/Transactions.js");
+/* harmony import */ var _context_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../context/Login */ "./context/Login.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Transactions_ListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Transactions/ListItem */ "./components/Transactions/ListItem.js");
+
+
+
+
+
+
+const AccountList = () => {
+  const [transactions, setTransactions] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_Transactions__WEBPACK_IMPORTED_MODULE_1__["TransactionsContext"]);
+  const [login, setLogin] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_Login__WEBPACK_IMPORTED_MODULE_2__["IsLoginContext"]);
+  if (!login) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+    to: "/react-banking-app/"
+  });
+  console.log(transactions);
+  return transactions.map(txn => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Transactions_ListItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: txn.id,
+    transaction: txn
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AccountList);
+
+/***/ }),
+
+/***/ "./components/Transactions/ListItem.js":
+/*!*********************************************!*\
+  !*** ./components/Transactions/ListItem.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const item = {
+  padding: '5px',
+  display: 'flex'
+};
+
+const ListItem = props => {
+  const {
+    from_account_no,
+    beneficiary_account_no,
+    beneficiary_account_name,
+    beneficiary_bank_branch_code,
+    txn_amount,
+    txn_currency,
+    txn_comments,
+    status
+  } = props.transaction;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: item
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, from_account_no), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, beneficiary_account_no), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, beneficiary_account_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, beneficiary_bank_branch_code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, txn_amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, txn_comments), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, status));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ListItem);
 
 /***/ }),
 
@@ -310,6 +459,80 @@ function Header() {
 
 /***/ }),
 
+/***/ "./context/Accounts.js":
+/*!*****************************!*\
+  !*** ./context/Accounts.js ***!
+  \*****************************/
+/*! exports provided: AccountsContext, AccountsProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountsContext", function() { return AccountsContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountsProvider", function() { return AccountsProvider; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const AccountsContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+const AccountsProvider = props => {
+  const [accounts, setAccounts] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: '1',
+    account_number: '13123fdgd4',
+    account_name: 'TOMs SBI',
+    first_name: 'Toms',
+    last_name: 'Ssam',
+    bank_branch_code: 'SBsdgs1234',
+    aadhar_number: 'q35234sdg623cfr',
+    country: 'INDIAsd',
+    txn_currency: 'Rupsdee'
+  }, {
+    id: '2',
+    account_number: '131234',
+    account_name: 'TOM SBI',
+    first_name: 'Tom',
+    last_name: 'Sam',
+    bank_branch_code: 'SB1234',
+    aadhar_number: 'q35234623cfr',
+    country: 'INDIA',
+    txn_currency: 'Rupee'
+  }, {
+    id: '3',
+    account_number: '131234',
+    account_name: 'TOM SBI',
+    first_name: 'Tom',
+    last_name: 'Sam',
+    bank_branch_code: 'SB1234',
+    aadhar_number: 'q35234623cfr',
+    country: 'INDIA',
+    txn_currency: 'Rupee'
+  }, {
+    id: '4',
+    account_number: '131234',
+    account_name: 'TOM SBI',
+    first_name: 'Tom',
+    last_name: 'Sam',
+    bank_branch_code: 'SB1234',
+    aadhar_number: 'q35234623cfr',
+    country: 'INDIA',
+    txn_currency: 'Rupee'
+  }, {
+    id: '5',
+    account_number: '131234',
+    account_name: 'TOM SBI',
+    first_name: 'Tom',
+    last_name: 'Sam',
+    bank_branch_code: 'SB1234',
+    aadhar_number: 'q35234623cfr',
+    country: 'INDIA',
+    txn_currency: 'Rupee'
+  }]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AccountsContext.Provider, {
+    value: [accounts, setAccounts]
+  }, props.children);
+};
+
+/***/ }),
+
 /***/ "./context/Login.js":
 /*!**************************!*\
   !*** ./context/Login.js ***!
@@ -329,6 +552,40 @@ const LoginProvider = props => {
   const [login, setLogin] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IsLoginContext.Provider, {
     value: [login, setLogin]
+  }, props.children);
+};
+
+/***/ }),
+
+/***/ "./context/Transactions.js":
+/*!*********************************!*\
+  !*** ./context/Transactions.js ***!
+  \*********************************/
+/*! exports provided: TransactionsContext, TransactionsProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionsContext", function() { return TransactionsContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionsProvider", function() { return TransactionsProvider; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const TransactionsContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+const TransactionsProvider = props => {
+  const [transactions, setTransactions] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    id: '1',
+    from_account_no: '131234',
+    beneficiary_account_no: '235235',
+    beneficiary_account_name: 'TOM SBI',
+    beneficiary_bank_branch_code: 'SBI13423',
+    txn_amount: '200',
+    txn_currency: 'Rupee',
+    txn_comments: 'refund',
+    status: 'completed'
+  }]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TransactionsContext.Provider, {
+    value: [transactions, setTransactions]
   }, props.children);
 };
 
@@ -32931,6 +33188,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/layouts/Header */ "./components/layouts/Header.js");
 /* harmony import */ var _context_Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../context/Login */ "./context/Login.js");
 /* harmony import */ var _context_User__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../context/User */ "./context/User.js");
+/* harmony import */ var _context_Accounts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../context/Accounts */ "./context/Accounts.js");
+/* harmony import */ var _context_Transactions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../context/Transactions */ "./context/Transactions.js");
+
+
 
 
 
@@ -32944,7 +33205,7 @@ const container = {
 function Bank() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_context_Login__WEBPACK_IMPORTED_MODULE_4__["LoginProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_context_User__WEBPACK_IMPORTED_MODULE_5__["UserProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layouts_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: container
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Router__WEBPACK_IMPORTED_MODULE_1__["default"], null)))))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_context_Accounts__WEBPACK_IMPORTED_MODULE_6__["AccountsProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_context_Transactions__WEBPACK_IMPORTED_MODULE_7__["TransactionsProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Router__WEBPACK_IMPORTED_MODULE_1__["default"], null)))))))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Bank);
@@ -32967,6 +33228,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Dashboard */ "./components/Dashboard.js");
 /* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Profile */ "./components/Profile.js");
 /* harmony import */ var _components_Logout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Logout */ "./components/Logout.js");
+/* harmony import */ var _components_Accounts_List__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Accounts/List */ "./components/Accounts/List.js");
+/* harmony import */ var _components_Transactions_List__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Transactions/List */ "./components/Transactions/List.js");
+
+
 
 
 
@@ -32982,6 +33247,12 @@ function Router() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/react-banking-app/dashboard",
     component: _components_Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/react-banking-app/accounts",
+    component: _components_Accounts_List__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/react-banking-app/transactions",
+    component: _components_Transactions_List__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/react-banking-app/profile",
     component: _components_Profile__WEBPACK_IMPORTED_MODULE_4__["default"]
