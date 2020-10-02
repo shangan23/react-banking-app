@@ -141,7 +141,7 @@ function Login(props) {
   const Authenticate = e => {
     e.preventDefault();
     setLogin(true);
-    return props.history.push("/dashboard");
+    return props.history.push("/react-banking-app/dashboard");
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
