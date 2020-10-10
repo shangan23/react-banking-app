@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/Accounts/List.js":
-/*!*************************************!*\
-  !*** ./components/Accounts/List.js ***!
-  \*************************************/
+/***/ "./components/Accounts.js":
+/*!********************************!*\
+  !*** ./components/Accounts.js ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -99,8 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Accounts_ListItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Accounts/ListItem */ "./components/Accounts/ListItem.js");
-/* harmony import */ var _redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/accounts/accountActions */ "./redux/accounts/accountActions.js");
+/* harmony import */ var _redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/accounts/accountActions */ "./redux/accounts/accountActions.js");
+/* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Table */ "./components/Table.js");
 
 
 
@@ -109,7 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const AccountList = props => {
   const {
-    user,
+    isLoggedIn,
     accounts,
     accountLoading
   } = props;
@@ -117,18 +117,19 @@ const AccountList = props => {
     props.accountFetch();
     fetch('https://my-json-server.typicode.com/shangan23/banking-api/accounts').then(res => res.json()).then(data => props.accountSuccess(data)).catch(err => props.accountFailure(err));
   }, []);
-  if (user.length <= 0) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+  if (!isLoggedIn) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
     to: "/react-banking-app/"
   });
-  if (accountLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading...");else return accounts.map(acc => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Accounts_ListItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    key: acc.id,
-    account: acc
-  }));
+  const header = ["id", "account_number", "account_name", "first_name", "last_name", "bank_branch_code", "aadhar_number", "country", "txn_currency"];
+  if (accountLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading...");else return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    headers: header,
+    data: accounts
+  });
 };
 
 const mapStateToProps = state => {
   return {
-    user: state.login.user,
+    isLoggedIn: state.login.isLoggedIn,
     accountLoading: state.accounts.loading,
     accounts: state.accounts.data
   };
@@ -136,50 +137,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    accountFetch: () => dispatch(_redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_4__["accountFetch"]),
-    accountSuccess: account => dispatch(Object(_redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_4__["accountSuccess"])(account)),
-    accountFailure: error => dispatch(Object(_redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_4__["accountFailure"])(error))
+    accountFetch: () => dispatch(_redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_3__["accountFetch"]),
+    accountSuccess: account => dispatch(Object(_redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_3__["accountSuccess"])(account)),
+    accountFailure: error => dispatch(Object(_redux_accounts_accountActions__WEBPACK_IMPORTED_MODULE_3__["accountFailure"])(error))
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AccountList));
-
-/***/ }),
-
-/***/ "./components/Accounts/ListItem.js":
-/*!*****************************************!*\
-  !*** ./components/Accounts/ListItem.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-const item = {
-  padding: '5px',
-  display: 'flex'
-};
-
-const ListItem = props => {
-  const {
-    account_number,
-    account_name,
-    first_name,
-    last_name,
-    bank_branch_code,
-    aadhar_number,
-    country,
-    txn_currency
-  } = props.account;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: item
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, account_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, account_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, first_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, last_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, bank_branch_code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, aadhar_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, country), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, txn_currency));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (ListItem);
 
 /***/ }),
 
@@ -202,9 +166,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function Dashboard(props) {
   const {
-    user
+    user,
+    isLoggedIn
   } = props;
-  if (user.length <= 0) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+  if (!isLoggedIn) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/react-banking-app/"
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello ", user.first_name, " ", user.last_name, "!"));
@@ -212,7 +177,8 @@ function Dashboard(props) {
 
 const mapStateToProps = state => {
   return {
-    user: state.login.user
+    user: state.login.user,
+    isLoggedIn: state.login.isLoggedIn
   };
 };
 
@@ -270,6 +236,73 @@ const Text = props => {
 
 /***/ }),
 
+/***/ "./components/Footer.js":
+/*!******************************!*\
+  !*** ./components/Footer.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+
+
+const getStyle = {
+  position: 'fixed',
+  bottom: 0,
+  padding: '1px',
+  width: '100%',
+  textAlign: 'center'
+};
+
+function Footer() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Paper"], {
+    variant: "outlined",
+    square: true,
+    style: getStyle
+  }, "@copyright");
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Footer);
+
+/***/ }),
+
+/***/ "./components/Header.js":
+/*!******************************!*\
+  !*** ./components/Header.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Navigation */ "./components/Navigation.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+
+
+
+
+function Header() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["AppBar"], {
+    position: "static"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    variant: "h5"
+  }, "React Bank"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      flexGrow: 1
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
 /***/ "./components/Login.js":
 /*!*****************************!*\
   !*** ./components/Login.js ***!
@@ -294,27 +327,61 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Login(props) {
+  const [username, setUsername] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('john');
+  const [password, setPassword] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('john@123');
+
+  const onUsernameChange = e => {
+    setUsername(e.target.value);
+  };
+
+  const onPasswordChange = e => {
+    setPassword(e.target.value);
+  };
+
   const Authenticate = e => {
     e.preventDefault();
     props.loginAction();
-    fetch('https://my-json-server.typicode.com/shangan23/banking-api/users').then(res => res.json()).then(data => props.loginSuccess(data[0])).then(() => {
+    fetch(`https://my-json-server.typicode.com/shangan23/banking-api/users?user_name=${username}`).then(res => res.json()).then(data => {
+      if (data.length > 0) props.loginSuccess(data[0]);else {
+        setUsername('');
+        setPassword('');
+        throw new Error('Invalid username/password');
+      }
+    }).then(() => {
       return props.history.push("/react-banking-app/dashboard");
     }).catch(err => props.loginFailure(err.message));
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Paper"], {
-    variant: "outlined"
-  }, props.loading ? '...' : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  let dialogTitle = 'Hey there! Welcome to React banking application';
+  dialogTitle = props.error ? `Error - ${props.error}` : dialogTitle;
+  dialogTitle = props.loading ? 'Authenticating please wait...' : dialogTitle;
+  let dialogTitleColor = 'primary';
+  dialogTitleColor = props.error ? 'secondary' : dialogTitleColor;
+  dialogTitleColor = props.error ? 'primary' : dialogTitleColor;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Dialog"], {
+    open: true,
+    disableBackdropClick: true,
+    hideBackdrop: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: Authenticate
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogTitle"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "subtitle1"
+  }, "Personal Banking - Login")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogContent"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogContentText"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "overline",
+    color: dialogTitleColor
+  }, dialogTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "caption",
+    color: "textPrimary"
+  }, "Try sample username/password as john/john")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
     container: true,
-    spacing: 8
+    spacing: 5
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
     container: true,
     item: true,
     xs: 6
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Fields_Text__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    value: "sdgsdg",
+    value: username,
+    onChange: onUsernameChange,
     required: true,
     placeholder: "Your username"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
@@ -322,16 +389,13 @@ function Login(props) {
     item: true,
     xs: 6
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Fields_Password__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: "sdgsdgsdgd",
+    value: password,
+    onChange: onPasswordChange,
     required: true,
     placeholder: "Your password"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
-    container: true,
-    item: true,
-    xs: 12
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogActions"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     variant: "contained",
-    color: "secondary",
+    color: "primary",
     type: "submit"
   }, "Login")))));
 }
@@ -482,15 +546,16 @@ __webpack_require__.r(__webpack_exports__);
 function Profile(props) {
   const {
     user,
+    isLoggedIn,
     profile,
     profileLoading
   } = props;
-  if (user.length <= 0) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+  if (!isLoggedIn) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/react-banking-app/"
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     props.profileFetch();
-    fetch(`https://my-json-server.typicode.com/shangan23/banking-api/users?user_name=${props.user.user_name}`).then(res => res.json()).then(data => props.profileSuccess(data[0])).catch(error => props.profileFailure(error));
+    fetch(`https://my-json-server.typicode.com/shangan23/banking-api/users?user_name=${user.user_name}`).then(res => res.json()).then(data => props.profileSuccess(data[0])).catch(error => props.profileFailure(error));
   }, []);
 
   if (!profileLoading) {
@@ -508,6 +573,7 @@ function Profile(props) {
 
 const mapStateToProps = state => {
   return {
+    isLoggedIn: state.login.isLoggedIn,
     user: state.login.user,
     profile: state.profile.data,
     profileLoading: state.profile.loading
@@ -547,10 +613,62 @@ const ProfileContainer = props => {
 
 /***/ }),
 
-/***/ "./components/Transactions/List.js":
-/*!*****************************************!*\
-  !*** ./components/Transactions/List.js ***!
-  \*****************************************/
+/***/ "./components/Table.js":
+/*!*****************************!*\
+  !*** ./components/Table.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BasicTable; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/esm/Table/index.js");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/esm/TableBody/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_TableContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableContainer */ "./node_modules/@material-ui/core/esm/TableContainer/index.js");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/esm/TableHead/index.js");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+
+
+
+
+
+
+
+
+
+const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  table: {
+    minWidth: 650
+  }
+});
+function BasicTable(props) {
+  const classes = useStyles();
+  const {
+    headers,
+    data
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableContainer__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    component: _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: classes.table,
+    "aria-label": "simple table"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__["default"], null, headers.map(headLabel => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], null, headLabel)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__["default"], null, data.map(row => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    key: row.id
+  }, Object.keys(row).map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], null, row[item])))))));
+}
+
+/***/ }),
+
+/***/ "./components/Transactions.js":
+/*!************************************!*\
+  !*** ./components/Transactions.js ***!
+  \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -560,8 +678,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_transactions_transactionActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/transactions/transactionActions */ "./redux/transactions/transactionActions.js");
-/* harmony import */ var _Transactions_ListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Transactions/ListItem */ "./components/Transactions/ListItem.js");
+/* harmony import */ var _redux_transactions_transactionActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/transactions/transactionActions */ "./redux/transactions/transactionActions.js");
+/* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Table */ "./components/Table.js");
 
 
 
@@ -570,7 +688,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const AccountList = props => {
   const {
-    user,
+    isLoggedIn,
     transactions,
     transactionLoading
   } = props;
@@ -578,18 +696,19 @@ const AccountList = props => {
     props.transactionFetch();
     fetch('https://my-json-server.typicode.com/shangan23/banking-api/transactions').then(res => res.json()).then(data => props.transactionSuccess(data)).catch(error => props.transactionFailure(error));
   }, []);
-  if (user.length <= 0) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+  const header = ["id", "from_account_no", "beneficiary_account_no", "beneficiary_account_name", "beneficiary_bank_branch_code", "txn_amount", "txn_currency", "txn_comments", "status"];
+  if (!isLoggedIn) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/react-banking-app/"
   });
-  if (transactionLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading...");else return transactions.map(txn => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Transactions_ListItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    key: txn.id,
-    transaction: txn
-  }));
+  if (transactionLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading...");else return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    headers: header,
+    data: transactions
+  });
 };
 
 const mapStateToProps = state => {
   return {
-    user: state.login.user,
+    isLoggedIn: state.login.isLoggedIn,
     transactions: state.transactions.data,
     transactionLoading: state.transactions.loading
   };
@@ -604,76 +723,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(AccountList));
-
-/***/ }),
-
-/***/ "./components/Transactions/ListItem.js":
-/*!*********************************************!*\
-  !*** ./components/Transactions/ListItem.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-const item = {
-  padding: '5px',
-  display: 'flex'
-};
-
-const ListItem = props => {
-  const {
-    from_account_no,
-    beneficiary_account_no,
-    beneficiary_account_name,
-    beneficiary_bank_branch_code,
-    txn_amount,
-    txn_currency,
-    txn_comments,
-    status
-  } = props.transaction;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: item
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, from_account_no), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, beneficiary_account_no), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, beneficiary_account_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, beneficiary_bank_branch_code), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, txn_amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, txn_comments), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, status));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (ListItem);
-
-/***/ }),
-
-/***/ "./components/layouts/Header.js":
-/*!**************************************!*\
-  !*** ./components/layouts/Header.js ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Navigation */ "./components/Navigation.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-
-
-
-
-function Header() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["AppBar"], {
-    position: "static"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
-    variant: "h5"
-  }, "React Bank"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      flexGrow: 1
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
 
@@ -85203,8 +85252,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginFailure", function() { return loginFailure; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony import */ var _loginTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./loginTypes */ "./redux/login/loginTypes.js");
-/* harmony import */ var _components_Logout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Logout */ "./components/Logout.js");
-
 
 
 const loginAction = () => {
@@ -85250,8 +85297,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const initialLoginState = {
   loading: false,
-  user: [],
-  error: ''
+  user: {},
+  error: '',
+  isLoggedIn: false
 };
 
 const loginReducer = (state = initialLoginState, action) => {
@@ -85265,14 +85313,16 @@ const loginReducer = (state = initialLoginState, action) => {
       return { ...state,
         loading: false,
         user: action.payload,
-        error: ''
+        error: '',
+        isLoggedIn: true
       };
 
     case _loginTypes__WEBPACK_IMPORTED_MODULE_0__["LOGIN_FAILURE"]:
       return { ...state,
         loading: false,
         user: [],
-        error: action.payload
+        error: action.payload,
+        isLoggedIn: false
       };
 
     case _loginTypes__WEBPACK_IMPORTED_MODULE_0__["LOGOUT"]:
@@ -85580,8 +85630,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Router */ "./src/Router.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_layouts_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/layouts/Header */ "./components/layouts/Header.js");
-/* harmony import */ var _redux_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../redux/store */ "./redux/store.js");
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
+/* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Footer */ "./components/Footer.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
@@ -85593,15 +85643,22 @@ const container = {
   padding: '5px'
 };
 
-function Bank() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__["Provider"], {
-    store: _redux_store__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layouts_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+function Bank(props) {
+  const {
+    isLoggedIn
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, isLoggedIn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: container
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Router__WEBPACK_IMPORTED_MODULE_1__["default"], null))))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Router__WEBPACK_IMPORTED_MODULE_1__["default"], null))), isLoggedIn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Bank);
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.login.isLoggedIn
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps)(Bank));
 
 /***/ }),
 
@@ -85621,8 +85678,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Dashboard */ "./components/Dashboard.js");
 /* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Profile */ "./components/Profile.js");
 /* harmony import */ var _components_Logout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Logout */ "./components/Logout.js");
-/* harmony import */ var _components_Accounts_List__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Accounts/List */ "./components/Accounts/List.js");
-/* harmony import */ var _components_Transactions_List__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Transactions/List */ "./components/Transactions/List.js");
+/* harmony import */ var _components_Accounts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Accounts */ "./components/Accounts.js");
+/* harmony import */ var _components_Transactions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Transactions */ "./components/Transactions.js");
 
 
 
@@ -85643,13 +85700,13 @@ function Router() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/react-banking-app/accounts",
-    component: _components_Accounts_List__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_Accounts__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/react-banking-app/accounts/:id",
-    component: _components_Accounts_List__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_Accounts__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/react-banking-app/transactions",
-    component: _components_Transactions_List__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_Transactions__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/react-banking-app/profile",
     component: _components_Profile__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -85678,10 +85735,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Bank__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Bank */ "./src/Bank.js");
+/* harmony import */ var _redux_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/store */ "./redux/store.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.StrictMode, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Bank__WEBPACK_IMPORTED_MODULE_2__["default"], null)), document.getElementById('root'));
+
+
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.StrictMode, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+  store: _redux_store__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Bank__WEBPACK_IMPORTED_MODULE_2__["default"], null))), document.getElementById('root'));
 
 /***/ })
 
