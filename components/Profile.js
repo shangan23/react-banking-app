@@ -1,21 +1,48 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../context/User'
-import { IsLoginContext } from '../context/Login'
+import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { profileFailure, profileFetch, profileSuccess } from '../redux/profile/profileActions';
+import ProfileContainer from './ProfileContainer'
 
-function Profile() {
-    const [user, setUser] = useContext(UserContext) 
-    const [login, setLogin] = useContext(IsLoginContext)
-    if (!login)
-        return <Redirect to="/login" />
-    return (
-        <ul>
-            <li>FullName: {user.first_name} {user.last_name}</li>
-            <li>Aadhar Number: {user.aadhar_number}</li>
-            <li>Country: {user.country}</li>
-        </ul>
-    )
+function Profile(props) {
+    const { user, profile,profileLoading } = props
 
+    if (user.length <= 0)
+        return <Redirect to="/react-banking-app/" />
+
+    useEffect(() => {
+        props.profileFetch()
+        fetch(`https://my-json-server.typicode.com/shangan23/banking-api/users?user_name=${props.user.user_name}`)
+            .then(res => res.json())
+            .then(data => props.profileSuccess(data[0]))
+            .catch(error => props.profileFailure(error))
+    }, [])
+
+    if (!profileLoading) {
+        return Object.keys(profile).map((item, index) => {
+            return (
+                <ProfileContainer key={index} v={profile[item]} k={item} />
+            )
+        })
+    } else {
+        return <div>loading...</div>
+    }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        user: state.login.user,
+        profile: state.profile.data,
+        profileLoading: state.profile.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        profileFetch: () => dispatch(profileFetch),
+        profileSuccess: data => dispatch(profileSuccess(data)),
+        profileFailure: error => dispatch(profileFailure(error))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -1,30 +1,16 @@
 import React from 'react'
 import Navigation from '../Navigation'
-
-const header = {
-    background: 'red',
-    padding: '5px'
-}
-
-const siteName = {
-    float: 'left'
-}
-
-const menus = {
-    float: 'right'
-}
-
-const clear = {
-    clear: 'both'
-}
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
 function Header() {
     return (
-        <div style={header}>
-            <div style={siteName}>React Bank</div>
-            <div style={menus}><Navigation /></div>
-            <div style={clear}></div>
-        </div>
+        <AppBar position="static">
+            <Toolbar>
+                <Typography variant="h5">React Bank</Typography>
+                <div style={{ flexGrow: 1 }} />
+                <Navigation />
+            </Toolbar>
+        </AppBar>
     )
 }
 export default Header;

@@ -1,12 +1,17 @@
 import React from 'react'
-import { IsLoginContext } from '../context/Login'
+import { connect } from 'react-redux'
+import { logout } from '../redux/login/loginAction'
 import { Redirect } from 'react-router-dom'
 
 function Logout(props) {
-    const [login, setLogin] = React.useContext(IsLoginContext)
-    return <React.Fragment>
-        {<Redirect to="/react-banking-app/" />}
-    </React.Fragment>
+    props.logout();
+    return <Redirect to="/react-banking-app/" />
 }
 
-export default Logout;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
+
+export default connect(null,mapDispatchToProps)(Logout);

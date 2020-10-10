@@ -1,25 +1,42 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { IsLoginContext } from '../context/Login'
+import { connect } from 'react-redux'
+import { logout } from '../redux/login/loginAction'
 
-function Navigation() {
-    const [login, setLogin] = useContext(IsLoginContext);
+function Navigation(props) {
     const link = {
         padding: '5px'
     }
+    const {user} = props
     return (
         <React.Fragment>
-            {login &&
+            {user.user_name &&
                 <React.Fragment>
                     <Link style={link} to="/react-banking-app/dashboard">Dashboard</Link> {' '}
                     <Link style={link} to="/react-banking-app/accounts">Accounts</Link> {' '}
                     <Link style={link} to="/react-banking-app/transactions">Transaction</Link> {' '}
                     <Link style={link} to="/react-banking-app/profile">Profile</Link> {' '}
-                    <Link style={link} to="/react-banking-app/logout" onClick={() => setLogin(false)}>Logout</Link>
+                    <Link style={link} to="/react-banking-app/logout" onClick={(e) => {
+                        e.preventDefault();
+                        props.logout()
+                    }
+                    }>Logout</Link>
                 </React.Fragment>
             }
         </React.Fragment>
     );
 }
 
-export default Navigation;
+const mapStateToProps = state => {
+    return {
+        user: state.login.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
