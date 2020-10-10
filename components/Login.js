@@ -41,7 +41,7 @@ function Login(props) {
 
     let dialogTitleColor = 'primary'
     dialogTitleColor = props.error ? 'secondary' : dialogTitleColor
-    dialogTitleColor = props.error ? 'primary' : dialogTitleColor
+    dialogTitleColor = props.loading ? 'primary' : dialogTitleColor
 
     return (
         <React.Fragment>
