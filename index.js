@@ -362,7 +362,7 @@ function Login(props) {
   dialogTitle = props.loading ? 'Authenticating please wait...' : dialogTitle;
   let dialogTitleColor = 'primary';
   dialogTitleColor = props.error ? 'secondary' : dialogTitleColor;
-  dialogTitleColor = props.error ? 'primary' : dialogTitleColor;
+  dialogTitleColor = props.loading ? 'primary' : dialogTitleColor;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Dialog"], {
     open: true,
     disableBackdropClick: true,
