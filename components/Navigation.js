@@ -1,37 +1,48 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../redux/login/loginAction'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 function Navigation(props) {
-    const link = {
-        padding: '5px'
-    }
-    const {user} = props
+
+    const [value, setValue] = React.useState(0);
+    const history = useHistory()
+
+    const menuList = [
+        "/react-banking-app/dashboard",
+        "/react-banking-app/accounts",
+        "/react-banking-app/transactions",
+        "/react-banking-app/profile",
+        "/react-banking-app/logout"
+    ]
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+        history.push(menuList[newValue])
+    };
+
     return (
-        <React.Fragment>
-            {user.user_name &&
-                <React.Fragment>
-                    <Link style={link} to="/react-banking-app/dashboard">Dashboard</Link> {' '}
-                    <Link style={link} to="/react-banking-app/accounts">Accounts</Link> {' '}
-                    <Link style={link} to="/react-banking-app/transactions">Transaction</Link> {' '}
-                    <Link style={link} to="/react-banking-app/profile">Profile</Link> {' '}
-                    <Link style={link} to="/react-banking-app/logout" onClick={(e) => {
-                        e.preventDefault();
-                        props.logout()
-                    }
-                    }>Logout</Link>
-                </React.Fragment>
-            }
-        </React.Fragment>
+        <Tabs
+            value={value}
+            indicatorColor="secondary"
+            textColor="secondary"
+            onChange={handleChange}
+            aria-label="disabled tabs example"
+        >
+            <Tab label="Dashboard" />
+            <Tab label="Accounts" />
+            <Tab label="Transaction" />
+            <Tab label="Profile" />
+            <Tab label="Logout" onClick={(e) => {
+                e.preventDefault()
+                props.logout()
+            }} />
+        </Tabs>
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.login.user
-    }
-}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -39,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(null, mapDispatchToProps)(Navigation);

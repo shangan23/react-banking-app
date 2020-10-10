@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {Typography} from '@material-ui/core'
 
 function Dashboard(props) {
     const { user, isLoggedIn } = props
@@ -8,7 +9,7 @@ function Dashboard(props) {
         return <Redirect to="/react-banking-app/" />
     return (
         <React.Fragment>
-            <h1>Hello {user.first_name} {user.last_name}!</h1>
+            <Typography variant="h5">Hello {user.first_name} {user.last_name}!</Typography>
         </React.Fragment>
     )
 }

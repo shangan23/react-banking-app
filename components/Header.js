@@ -6,7 +6,7 @@ function Header() {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h5">React Bank</Typography>
+                <Typography variant="h6">React Bank</Typography>
                 <div style={{ flexGrow: 1 }} />
                 <Navigation />
             </Toolbar>

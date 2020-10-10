@@ -3,8 +3,17 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { profileFailure, profileFetch, profileSuccess } from '../redux/profile/profileActions';
 import ProfileContainer from './ProfileContainer'
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+    }
+});
 
 function Profile(props) {
+    const classes = useStyles();
     const { user, isLoggedIn, profile, profileLoading } = props
 
     if (!isLoggedIn)
@@ -19,11 +28,10 @@ function Profile(props) {
     }, [])
 
     if (!profileLoading) {
-        return Object.keys(profile).map((item, index) => {
-            return (
-                <ProfileContainer key={index} v={profile[item]} k={item} />
-            )
-        })
+        return <Card className={classes.root}>
+            {Object.keys(profile).map((item, index) => {
+            return <ProfileContainer key={index} v={profile[item]} k={item} />})}
+        </Card>
     } else {
         return <div>loading...</div>
     }
