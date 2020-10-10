@@ -4,8 +4,8 @@ import Login from '../components/Login';
 import Dashboard from '../components/Dashboard';
 import Profile from '../components/Profile';
 import Logout from '../components/Logout';
-import Accounts from '../components/Accounts/List';
-import Transactions from '../components/Transactions/List';
+import Accounts from '../components/Accounts';
+import Transactions from '../components/Transactions';
 
 function Router() {
     const router = <React.Fragment>

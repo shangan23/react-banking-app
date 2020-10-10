@@ -5,14 +5,14 @@ import { profileFailure, profileFetch, profileSuccess } from '../redux/profile/p
 import ProfileContainer from './ProfileContainer'
 
 function Profile(props) {
-    const { user, profile,profileLoading } = props
+    const { user, isLoggedIn, profile, profileLoading } = props
 
-    if (user.length <= 0)
+    if (!isLoggedIn)
         return <Redirect to="/react-banking-app/" />
 
     useEffect(() => {
         props.profileFetch()
-        fetch(`https://my-json-server.typicode.com/shangan23/banking-api/users?user_name=${props.user.user_name}`)
+        fetch(`https://my-json-server.typicode.com/shangan23/banking-api/users?user_name=${user.user_name}`)
             .then(res => res.json())
             .then(data => props.profileSuccess(data[0]))
             .catch(error => props.profileFailure(error))
@@ -31,6 +31,7 @@ function Profile(props) {
 
 const mapStateToProps = state => {
     return {
+        isLoggedIn: state.login.isLoggedIn,
         user: state.login.user,
         profile: state.profile.data,
         profileLoading: state.profile.loading

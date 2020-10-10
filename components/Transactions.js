@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { transactionFetch, transactionSuccess, transactionFailure } from '../../redux/transactions/transactionActions'
-import ListItem from '../Transactions/ListItem'
+import { transactionFetch, transactionSuccess, transactionFailure } from '../redux/transactions/transactionActions'
+import Table from './Table'
 
 const AccountList = (props) => {
 
-    const { user, transactions, transactionLoading } = props
+    const { isLoggedIn, transactions, transactionLoading } = props
 
     useEffect(() => {
         props.transactionFetch()
@@ -16,18 +16,30 @@ const AccountList = (props) => {
             .catch(error => props.transactionFailure(error))
     }, [])
 
-    if (user.length <= 0)
+    const header = [
+        "id",
+        "from_account_no",
+        "beneficiary_account_no",
+        "beneficiary_account_name",
+        "beneficiary_bank_branch_code",
+        "txn_amount",
+        "txn_currency",
+        "txn_comments",
+        "status"
+    ]
+
+    if (!isLoggedIn)
         return <Redirect to="/react-banking-app/" />
 
     if (transactionLoading)
         return <div>loading...</div>
     else
-        return transactions.map(txn => (<ListItem key={txn.id} transaction={txn} />))
+        return <Table headers={header} data={transactions} />
 }
 
 const mapStateToProps = state => {
     return {
-        user: state.login.user,
+        isLoggedIn: state.login.isLoggedIn,
         transactions: state.transactions.data,
         transactionLoading: state.transactions.loading
     }

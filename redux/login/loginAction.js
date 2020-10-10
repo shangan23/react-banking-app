@@ -1,5 +1,4 @@
 import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE,LOGOUT } from './loginTypes'
-import Logout from '../../components/Logout';
 
 const loginAction = () => {
     return {

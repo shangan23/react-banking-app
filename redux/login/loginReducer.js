@@ -2,8 +2,9 @@ import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './loginTypes'
 
 const initialLoginState = {
     loading: false,
-    user: [],
-    error: ''
+    user: {},
+    error: '',
+    isLoggedIn:false
 }
 
 const loginReducer = (state = initialLoginState, action) => {
@@ -18,14 +19,16 @@ const loginReducer = (state = initialLoginState, action) => {
                 ...state,
                 loading: false,
                 user: action.payload,
-                error: ''
+                error: '',
+                isLoggedIn:true
             }
         case LOGIN_FAILURE:
             return {
                 ...state,
                 loading: false,
                 user: [],
-                error: action.payload
+                error: action.payload,
+                isLoggedIn:false
             }
         case LOGOUT:
             return initialLoginState

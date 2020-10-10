@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import ListItem from '../Accounts/ListItem'
-import { accountFetch, accountSuccess, accountFailure } from '../../redux/accounts/accountActions'
+import { accountFetch, accountSuccess, accountFailure } from '../redux/accounts/accountActions'
+import Table from './Table'
 
 const AccountList = (props) => {
-    const { user, accounts, accountLoading } = props
+    const { isLoggedIn, accounts, accountLoading } = props
 
     useEffect(() => {
         props.accountFetch()
@@ -15,18 +15,30 @@ const AccountList = (props) => {
             .catch(err => props.accountFailure(err))
     }, [])
 
-    if (user.length <= 0)
+    if (!isLoggedIn)
         return <Redirect to="/react-banking-app/" />
+
+    const header = [
+        "id",
+        "account_number",
+        "account_name",
+        "first_name",
+        "last_name",
+        "bank_branch_code",
+        "aadhar_number",
+        "country",
+        "txn_currency"
+    ]
 
     if (accountLoading)
         return <div>loading...</div>
     else
-        return accounts.map(acc => (<ListItem key={acc.id} account={acc} />))
+        return <Table headers={header} data={accounts} />
 }
 
 const mapStateToProps = state => {
     return {
-        user: state.login.user,
+        isLoggedIn: state.login.isLoggedIn,
         accountLoading: state.accounts.loading,
         accounts: state.accounts.data
     }

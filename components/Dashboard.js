@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function Dashboard(props) {
-    const { user } = props
-    if (user.length <= 0)
+    const { user, isLoggedIn } = props
+    if (!isLoggedIn)
         return <Redirect to="/react-banking-app/" />
     return (
         <React.Fragment>
@@ -15,7 +15,8 @@ function Dashboard(props) {
 
 const mapStateToProps = state => {
     return {
-        user: state.login.user
+        user: state.login.user,
+        isLoggedIn: state.login.isLoggedIn
     }
 }
 
